@@ -308,7 +308,7 @@ The format to use when writing to output destination.
 
 ---
 
-* Syntax: **json_log_kafka_brokers** list of brokers separated by spaces;
+* Syntax: **json_log_kafka_brokers** list of brokers separated by comma;
 * Default: —
 * Context: http main
 * Context: stream main
