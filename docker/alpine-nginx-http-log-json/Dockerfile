@@ -1,9 +1,7 @@
-FROM alpine
-
-LABEL maintainer "fooinha@gmail.com"
+FROM alpine as builder
 
 # Build arguments
-ARG GIT_LOCATION=https://github.com/fooinha/nginx-json-log.git
+ARG GIT_LOCATION=git@github.com:hung96ad/nginx-json-log.git
 ARG GIT_BRANCH=master
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
@@ -62,3 +60,16 @@ RUN apk del zlib-dev
 
 CMD /usr/local/nginx/sbin/nginx
 WORKDIR /usr/local/nginx/conf
+
+FROM nginx:alpine
+
+WORKDIR /usr/local/nginx/conf
+
+COPY --from=builder /usr/local/nginx/ /usr/local/nginx/
+
+
+RUN apk add --no-cache pcre
+RUN apk add --no-cache jansson
+RUN apk add --no-cache librdkafka
+
+CMD /usr/local/nginx/sbin/nginx
