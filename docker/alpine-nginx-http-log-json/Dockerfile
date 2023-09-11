@@ -1,7 +1,7 @@
 FROM alpine as builder
 
 # Build arguments
-ARG GIT_LOCATION=git@github.com:hung96ad/nginx-json-log.git
+ARG GIT_LOCATION=https://github.com/hung96ad/nginx-json-log.git
 ARG GIT_BRANCH=master
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
